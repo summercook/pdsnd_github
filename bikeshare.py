@@ -162,7 +162,7 @@ def raw_data(df):
     """Displays the first 8 columns of data if desired. The user can choose
     the number of rows shown. A nested loop is included so that the
     user receives a different prompt after the first data sample is shown.
-    Data continues to be shown at the interval requested at the first prompt.
+    Data continues to be shown at the interval requested at the first prompt..
 
     A separate loop is created to give the user the oportunity to view trips one at a time
     as a series, which is more readable. """
