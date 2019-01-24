@@ -110,13 +110,11 @@ def station_stats(df):
      is created by joining Start Station and End Station to find the most
      common route"""
 
-    popular_start_station = df['Start Station'].mode()[0]
 
-    print('\nMost Frequent Start Station:\n', popular_start_station)
+    print('\nMost Frequent Start Station:\n', df['Start Station'].mode()[0] )
 
-    popular_end_station = df['End Station'].mode()[0]
 
-    print('\nMost Frequent End Station:\n', popular_end_station)
+    print('\nMost Frequent End Station:\n', df['End Station'].mode()[0])
 
     df['Route'] = df['Start Station'] + ' to ' + df['End Station']
 
