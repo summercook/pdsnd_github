@@ -28,8 +28,8 @@ def get_filters():
     month = 'all'
 
     while True:
-        month_or_day = input('Would you like to filter by month, day, or not at all?\n').lower()
-        if month_or_day in ('month','day','not at all', 'none', 'no'):
+        month_or_day = input('Would you like to filter by month, day, or not at all? If not at all enter none. \n').lower()
+        if month_or_day in ('month','day', 'none'):
             break
         else:
             print('Please enter a valid answer')
@@ -63,29 +63,27 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-# load data file into a dataframe
+
     df = pd.read_csv(CITY_DATA[city])
 
-# convert the Start Time column to datetime
+
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
-# extract month and day of week from Start Time to create new columns
+
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     df['hour'] = df['Start Time'].dt.hour
 
-# filter by month if applicable
+
     if month != 'all':
-    # use the index of the months list to get the corresponding int
+
         month = monthnames.index(month) + 1
 
-
-    # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
-# filter by day of week if applicable
+
     if day != 'all':
-    # filter by day of week to create the new dataframe
+
         df = df[df['day_of_week'] == day.title()]
 
     return df
@@ -110,13 +108,11 @@ def station_stats(df):
      is created by joining Start Station and End Station to find the most
      common route"""
 
-    popular_start_station = df['Start Station'].mode()[0]
 
-    print('\nMost Frequent Start Station:\n', popular_start_station)
+    print('\nMost Frequent Start Station:\n', df['Start Station'].mode()[0] )
 
-    popular_end_station = df['End Station'].mode()[0]
 
-    print('\nMost Frequent End Station:\n', popular_end_station)
+    print('\nMost Frequent End Station:\n', df['End Station'].mode()[0])
 
     df['Route'] = df['Start Station'] + ' to ' + df['End Station']
 
@@ -143,7 +139,8 @@ def trip_duration_stats(df):
 
 def user_stats(df):
     """Displays statistics on user characteristics. Including user type, gender,
-    most common age, and the minimum and maximum age"""
+    most common age, and the minimum and maximum age. A try loop is included as
+    the washington file has incomplete user stats"""
 
     try:
         print('\nDistribution of user types:\n', df['User Type'].value_counts())
@@ -172,10 +169,10 @@ def raw_data(df):
 
     while True:
         answer = input('\n Would you like to see raw trip data? \n If yes, enter the number of trips you would like to see at once (1-100). Otherwise enter no.\n').lower()
-        try:
+
             if answer == 'no':
                 return
-            if int(answer) in range(2,100) and x < df.shape[0]:
+            elif int(answer) in range(2,100) and x < df.shape[0]:
                 print(df.iloc[:int(answer), :8 ])
                 while True:
                     answer2 = input('\nWould you like to see more data? Enter yes or no.\n').lower()
@@ -188,7 +185,7 @@ def raw_data(df):
                     elif (answer2 != 'yes' and answer2 != 'no'):
                         print('\nPlease enter yes or no')
                         continue
-            if answer == '1':
+            elif answer == '1':
                 print(df.iloc[0, :8 ])
                 while True:
                     answer2 = input('\nWould you like to see more data? Enter yes or no.\n')
@@ -201,7 +198,7 @@ def raw_data(df):
                         print('\nPlease enter yes or no')
                         continue
 
-        except ValueError:
+
             print('Please enter a valid answer')
 
 
