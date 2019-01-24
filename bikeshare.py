@@ -28,8 +28,8 @@ def get_filters():
     month = 'all'
 
     while True:
-        month_or_day = input('Would you like to filter by month, day, or not at all?\n').lower()
-        if month_or_day in ('month','day','not at all', 'none', 'no'):
+        month_or_day = input('Would you like to filter by month, day, or not at all? If not at all enter none. \n').lower()
+        if month_or_day in ('month','day', 'none'):
             break
         else:
             print('Please enter a valid answer')
