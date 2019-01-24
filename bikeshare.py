@@ -127,7 +127,7 @@ def station_stats(df):
 
 def trip_duration_stats(df):
     """ Displays statistics on total trip duration and average trip duration.
-    Breaks seconds into bigger units """
+    Breaks seconds into bigger units. """
 
     total_travel_time = df['Trip Duration'].sum()
     if total_travel_time >= 3600:
