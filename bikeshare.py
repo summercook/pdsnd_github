@@ -139,7 +139,8 @@ def trip_duration_stats(df):
 
 def user_stats(df):
     """Displays statistics on user characteristics. Including user type, gender,
-    most common age, and the minimum and maximum age"""
+    most common age, and the minimum and maximum age. A try loop is included as
+    the washington file has incomplete user stats"""
 
     try:
         print('\nDistribution of user types:\n', df['User Type'].value_counts())
