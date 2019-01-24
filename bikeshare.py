@@ -170,10 +170,10 @@ def raw_data(df):
 
     while True:
         answer = input('\n Would you like to see raw trip data? \n If yes, enter the number of trips you would like to see at once (1-100). Otherwise enter no.\n').lower()
-        try:
+
             if answer == 'no':
                 return
-            if int(answer) in range(2,100) and x < df.shape[0]:
+            elif int(answer) in range(2,100) and x < df.shape[0]:
                 print(df.iloc[:int(answer), :8 ])
                 while True:
                     answer2 = input('\nWould you like to see more data? Enter yes or no.\n').lower()
@@ -186,7 +186,7 @@ def raw_data(df):
                     elif (answer2 != 'yes' and answer2 != 'no'):
                         print('\nPlease enter yes or no')
                         continue
-            if answer == '1':
+            elif answer == '1':
                 print(df.iloc[0, :8 ])
                 while True:
                     answer2 = input('\nWould you like to see more data? Enter yes or no.\n')
@@ -199,7 +199,7 @@ def raw_data(df):
                         print('\nPlease enter yes or no')
                         continue
 
-        except ValueError:
+
             print('Please enter a valid answer')
 
 
